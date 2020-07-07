@@ -1,4 +1,5 @@
 #!/bin/sh
 
 # Starts the PHP events/listeners example.
-docker run --rm --volume $PWD:/app --user $(id -u):$(id -g) php php /app/custom-eventHandler.php
+docker build . -t php-events-listeners
+docker run  --rm --user $(id -u):$(id -g) php-events-listeners php /app/custom-eventHandler.php
