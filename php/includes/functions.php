@@ -9,7 +9,9 @@ function a() {
     echo "Starting function A...\r\n";
     sleep(rand(1,10));
     echo "A is running!\r\n";
-    eventManager::trigger(AEVENT);
+    if (class_exists("eventManager")) {
+        eventManager::trigger(AEVENT);
+    }
 }
 
 function d() {
