@@ -1,45 +1,13 @@
 <?php
 include "vendor/autoload.php";
+include "includes/myEventManager.php";
+include "includes/functions.php";
 
 use Spatie\Async\Pool;
 
 // Constants.
 define("AEVENT", "AReady");
 define("BCEVENT", "BCReady");
-
-// The event/listeners manager.
-class eventManager {
-    // Registry of events.
-    public static $events = array();
-    // Trigger an event.
-    public static function trigger($event, $args = array()) {
-        if(isset(self::$events[$event])) {
-            foreach(self::$events[$event] as $func) {
-                call_user_func($func, $args);
-            }
-        }
-    }
-    // Bind a listener to an event.
-    public static function bind($event, Closure $func) {
-        self::$events[$event][] = $func;
-    }
-}
-
-// The functions which will be handled asynchronously.
-function a() {
-    echo "Starting function A...\r\n";
-    sleep(rand(1,10));
-    echo "A is running!\r\n";
-    return true;
-}
-
-function d() {
-    echo "Starting function D:\r\n";
-    echo "This was a triumph!\r\n";
-    sleep(rand(1,10));
-    echo "I'm making a note here: huge success\r\n";
-    echo "Function D completed.\r\n";
-}
 
 // Configure event listeners.
 eventManager::bind(AEVENT, function() {
