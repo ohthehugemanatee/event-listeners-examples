@@ -1,15 +1,21 @@
 <?php
+
+/**
+ * @file
+ * Example implementation using a custom event/listener class.
+ */
+
+use Spatie\Async\Pool;
+
 include "vendor/autoload.php";
 include "includes/myEventManager.php";
 include "includes/functions.php";
-
-use Spatie\Async\Pool;
 
 // Constants.
 define("AEVENT", "AReady");
 define("BCEVENT", "BCReady");
 
-// Configure event listeners.
+// Action triggered by "AEVENT" (a() reports ready).
 eventManager::bind(AEVENT, function() {
     echo "Starting functions B and C asynchronously...\r\n";
     $pool = Pool::create();
@@ -22,11 +28,12 @@ eventManager::bind(AEVENT, function() {
     $pool->wait();
     eventManager::trigger(BCEVENT);
 });
-
+// Action triggered by "BCEVENT" (b() and c() report ready).
 eventManager::bind(BCEVENT, function() {
     d();
 });
+
+// Execution.
 a();
-eventManager::trigger(AEVENT);
 exit(0);
 ?>

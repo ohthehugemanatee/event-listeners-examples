@@ -1,12 +1,15 @@
 <?php
 
-
-// The functions which will be handled asynchronously.
+/**
+ * The functions which will be handled synchronously.
+ * NB: functions B and C are anonymous functions, since
+ * the async callback spawns a new thread.
+ */
 function a() {
     echo "Starting function A...\r\n";
     sleep(rand(1,10));
     echo "A is running!\r\n";
-    return true;
+    eventManager::trigger(AEVENT);
 }
 
 function d() {
