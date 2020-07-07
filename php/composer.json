@@ -1,0 +1,15 @@
+{
+    "name": "ohthehugemanatee/events-example",
+    "description": "An example of events handling in PHP",
+    "type": "project",
+    "require": {
+        "spatie/async": "^1.4"
+    },
+    "license": "GPL",
+    "authors": [
+        {
+            "name": "Campbell Vertesi",
+            "email": "campbell@vertesi.com"
+        }
+    ]
+}
